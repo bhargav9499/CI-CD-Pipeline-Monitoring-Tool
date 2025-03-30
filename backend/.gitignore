@@ -1,0 +1,20 @@
+# Backend .gitignore
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Pycharm, VSCode
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Environment variables
+.env

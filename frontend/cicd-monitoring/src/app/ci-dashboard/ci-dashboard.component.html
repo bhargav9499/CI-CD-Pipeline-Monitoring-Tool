@@ -1,0 +1,68 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>🚀 CI/CD Pipeline Monitoring Dashboard</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <div class="container mt-4">
+    <mat-card>
+      <table mat-table [dataSource]="workflowRuns" class="mat-elevation-z8" style="width: 100%;">
+  
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let run">{{run.id}}</td>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let run">{{run.name}}</td>
+        </ng-container>
+  
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let run">{{run.status}}</td>
+        </ng-container>
+  
+        <!-- Conclusion Column -->
+        <ng-container matColumnDef="conclusion">
+          <th mat-header-cell *matHeaderCellDef>Conclusion</th>
+          <td mat-cell *matCellDef="let run">
+            <span [ngClass]="{
+              'badge bg-success': run.conclusion === 'success',
+              'badge bg-danger': run.conclusion === 'failure',
+              'badge bg-warning': run.conclusion !== 'success' && run.conclusion !== 'failure'
+            }">
+              {{run.conclusion}}
+            </span>
+          </td>
+        </ng-container>
+  
+        <!-- Branch Column -->
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef>Branch</th>
+          <td mat-cell *matCellDef="let run">{{run.head_branch}}</td>
+        </ng-container>
+  
+        <!-- Created At Column -->
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef>Created At</th>
+          <td mat-cell *matCellDef="let run">{{run.created_at | date:'medium'}}</td>
+        </ng-container>
+  
+        <!-- URL Column -->
+        <ng-container matColumnDef="url">
+          <th mat-header-cell *matHeaderCellDef>Link</th>
+          <td mat-cell *matCellDef="let run">
+            <a mat-button color="accent" [href]="run.html_url" target="_blank">View Run</a>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="['id', 'name', 'status', 'conclusion', 'branch', 'created', 'url']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'status', 'conclusion', 'branch', 'created', 'url'];"></tr>
+      </table>
+    </mat-card>
+  </div>
+  
